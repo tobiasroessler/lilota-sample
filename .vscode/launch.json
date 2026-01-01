@@ -1,0 +1,13 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    {
+      "name": "1-hello-world",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/1-hello-world.py",
+      "args": [],
+      "justMyCode": true
+    }
+  ]
+}
