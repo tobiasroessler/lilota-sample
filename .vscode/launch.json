@@ -8,6 +8,14 @@
       "program": "${workspaceFolder}/src/1-hello-world.py",
       "args": [],
       "justMyCode": true
+    },
+    {
+      "name": "2-add-two-numbers",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/2-add-two-numbers.py",
+      "args": [],
+      "justMyCode": true
     }
   ]
 }
