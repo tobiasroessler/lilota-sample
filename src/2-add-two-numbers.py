@@ -29,7 +29,7 @@ def main():
   lilota.stop()
   task: Task = lilota.get_task_by_id(task_id)
   add_output = AddOutput(**task.output)
-  print(f"{number1} + {number2} = {add_output.sum} ")
+  print(f"{number1} + {number2} = {add_output.sum} ") # 2 + 3 = 5
 
 
 if __name__ == "__main__":
