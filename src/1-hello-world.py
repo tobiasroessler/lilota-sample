@@ -2,7 +2,7 @@ from lilota.core import Lilota
 from lilota.models import Task
 
 
-lilota = Lilota(name="Default", db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
+lilota = Lilota(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
 
 
 @lilota.register("hello-world")

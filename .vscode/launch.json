@@ -16,6 +16,14 @@
       "program": "${workspaceFolder}/src/2-add-two-numbers.py",
       "args": [],
       "justMyCode": true
+    },
+    {
+      "name": "3-add-two-numbers-using-pydantic",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/3-add-two-numbers-using-pydantic.py",
+      "args": [],
+      "justMyCode": true
     }
   ]
 }

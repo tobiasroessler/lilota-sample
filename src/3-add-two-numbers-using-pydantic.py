@@ -1,17 +1,27 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
+from typing import Any
 from lilota.core import Lilota
 from lilota.models import Task
 
 
-@dataclass
-class AddInput():
-    a: int
-    b: int
+class AddInput(BaseModel):
+  a: int
+  b: int
+
+  def as_dict(self) -> dict[str, Any]:
+    return {
+      "a": self.a,
+      "b": self.b,
+    }
 
 
-@dataclass
-class AddOutput():
+class AddOutput(BaseModel):
   sum: int
+
+  def as_dict(self) -> dict[str, Any]:
+    return {
+      "sum": self.sum
+    }
 
 
 lilota = Lilota(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
