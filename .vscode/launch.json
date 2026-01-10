@@ -32,6 +32,14 @@
       "program": "${workspaceFolder}/src/4-using-db-inside-task.py",
       "args": [],
       "justMyCode": true
+    },
+    {
+      "name": "5-setting-task-progress-manually",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/5-setting-task-progress-manually.py",
+      "args": [],
+      "justMyCode": true
     }
   ]
 }
