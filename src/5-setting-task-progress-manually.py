@@ -1,5 +1,6 @@
 from lilota.core import Lilota
 from lilota.models import Task, TaskProgress
+import time
 
 
 lilota = Lilota(
@@ -16,7 +17,7 @@ def do_something(task_progress: TaskProgress) -> None:
 def main():
   lilota.start()
   task_id = lilota.schedule("do_something")
-  lilota.stop()
+  time.sleep(1) # Wait that worker picks up the task (normally not needed)
   task: Task = lilota.get_task_by_id(task_id)
   print(task.progress_percentage) # Should be 100
 

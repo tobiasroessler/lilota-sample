@@ -3,6 +3,7 @@ from lilota.models import Task
 import os
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base
+import time
 
 
 # A simple db with one table for testing
@@ -50,7 +51,7 @@ def safe_db_task(params: dict[str, str]) -> dict[str, int]:
 def main():
   lilota.start()
   task_id = lilota.schedule("safe_db_task", { "value": "123" })
-  lilota.stop()
+  time.sleep(1) # Wait that worker picks up the task (normally not needed)
   task: Task = lilota.get_task_by_id(task_id)
   print(task.output)
 

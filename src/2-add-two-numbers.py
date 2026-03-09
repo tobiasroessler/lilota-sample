@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from lilota.core import Lilota
 from lilota.models import Task
+import time
 
 
 @dataclass
@@ -26,7 +27,7 @@ def main():
   number2 = 3
   lilota.start()
   task_id = lilota.schedule("add", AddInput(a=number1, b=number2))
-  lilota.stop()
+  time.sleep(1) # Wait that worker picks up the task (normally not needed)
   task: Task = lilota.get_task_by_id(task_id)
   add_output = AddOutput(**task.output)
   print(f"{number1} + {number2} = {add_output.sum} ") # 2 + 3 = 5
