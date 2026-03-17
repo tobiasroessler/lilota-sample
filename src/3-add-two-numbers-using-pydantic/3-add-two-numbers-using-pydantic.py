@@ -25,11 +25,10 @@ class AddOutput(BaseModel):
     }
 
 
-lilota = Lilota(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
-
-@lilota.register("add", input_model=AddInput, output_model=AddOutput)
-def add(data: AddInput) -> AddOutput:
-  return AddOutput(sum=data.a + data.b)
+lilota = Lilota(
+  db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
+  script_path="src/3-add-two-numbers-using-pydantic/3-worker-script.py"
+)
 
 
 def main():
@@ -37,7 +36,7 @@ def main():
   number2 = 3
   lilota.start()
   task_id = lilota.schedule("add", AddInput(a=number1, b=number2))
-  time.sleep(1) # Wait that worker picks up the task (normally not needed)
+  time.sleep(3) # Wait that worker picks up the task (normally not needed)
   task: Task = lilota.get_task_by_id(task_id)
   add_output = AddOutput(**task.output)
   print(f"{number1} + {number2} = {add_output.sum} ") # 2 + 3 = 5

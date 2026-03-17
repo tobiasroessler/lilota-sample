@@ -1,9 +1,7 @@
-from lilota.core import Lilota
-from lilota.models import Task
+from lilota.worker import LilotaWorker
 import os
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base
-import time
 
 
 # A simple db with one table for testing
@@ -11,15 +9,17 @@ Base = declarative_base()
 DB_FILE = os.path.join(os.path.dirname(__file__), "test-4.db")
 DB_URL = f"sqlite:///{DB_FILE}"
 
+
 class TestTable(Base):
   __tablename__ = "test_table"
   id = Column(Integer, primary_key=True)
   value = Column(String)
 
 
-lilota = Lilota(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
+worker = LilotaWorker(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
 
-@lilota.register("safe_db_task", input_model=dict[str, str], output_model=dict[str, int])
+
+@worker.register("safe_db_task", input_model=dict[str, str], output_model=dict[str, int])
 def safe_db_task(params: dict[str, str]) -> dict[str, int]:
   """
   Create engine & session inside the task.
@@ -49,11 +49,7 @@ def safe_db_task(params: dict[str, str]) -> dict[str, int]:
 
 
 def main():
-  lilota.start()
-  task_id = lilota.schedule("safe_db_task", { "value": "123" })
-  time.sleep(1) # Wait that worker picks up the task (normally not needed)
-  task: Task = lilota.get_task_by_id(task_id)
-  print(task.output)
+  worker.start()
 
 
 if __name__ == "__main__":
