@@ -1,33 +1,24 @@
-from pydantic import BaseModel
-from typing import Any
+from dataclasses import dataclass
 from lilota.core import Lilota
 from lilota.models import Task
+from pathlib import Path
 import time
 
 
-class AddInput(BaseModel):
-  a: int
-  b: int
-
-  def as_dict(self) -> dict[str, Any]:
-    return {
-      "a": self.a,
-      "b": self.b,
-    }
+@dataclass
+class AddInput():
+    a: int
+    b: int
 
 
-class AddOutput(BaseModel):
+@dataclass
+class AddOutput():
   sum: int
-
-  def as_dict(self) -> dict[str, Any]:
-    return {
-      "sum": self.sum
-    }
 
 
 lilota = Lilota(
   db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
-  script_path="src/3-add-two-numbers-using-pydantic/3-worker-script.py"
+  script_path=str(Path(__file__).resolve().parent / "workerscript.py")
 )
 
 

@@ -5,7 +5,7 @@
       "name": "1-hello-world",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/1-hello-world/1-hello-world.py",
+      "program": "${workspaceFolder}/src/1-hello-world/main.py",
       "args": [],
       "justMyCode": true
     },
@@ -13,7 +13,7 @@
       "name": "2-add-two-numbers",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/2-add-two-numbers/2-add-two-numbers.py",
+      "program": "${workspaceFolder}/src/2-add-two-numbers/main.py",
       "args": [],
       "justMyCode": true
     },
@@ -21,7 +21,7 @@
       "name": "3-add-two-numbers-using-pydantic",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/3-add-two-numbers-using-pydantic/3-add-two-numbers-using-pydantic.py",
+      "program": "${workspaceFolder}/src/3-add-two-numbers-using-pydantic/main.py",
       "args": [],
       "justMyCode": true
     },
@@ -29,7 +29,7 @@
       "name": "4-using-db-inside-task",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/4-using-db-inside-task/4-using-db-inside-task.py",
+      "program": "${workspaceFolder}/src/4-using-db-inside-task/main.py",
       "args": [],
       "justMyCode": true
     },
@@ -37,7 +37,15 @@
       "name": "5-setting-task-progress-manually",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/5-setting-task-progress-manually/5-setting-task-progress-manually.py",
+      "program": "${workspaceFolder}/src/5-setting-task-progress-manually/main.py",
+      "args": [],
+      "justMyCode": true
+    },
+    {
+      "name": "6-script-with-modules",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/6-script-with-modules/main.py",
       "args": [],
       "justMyCode": true
     }

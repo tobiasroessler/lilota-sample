@@ -1,6 +1,7 @@
 from lilota.core import Lilota
 from lilota.models import Task
 import os
+from pathlib import Path
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base
 import time
@@ -17,9 +18,11 @@ class TestTable(Base):
   value = Column(String)
 
 
+script_path = Path(__file__).resolve().parent / "src" / "5-setting-task-progress-manually" / "workerscript.py"
+
 lilota = Lilota(
   db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
-  script_path="src/4-using-db-inside-task/4-worker-script.py"
+  script_path="src/4-using-db-inside-task/workerscript.py"
 )
 
 
