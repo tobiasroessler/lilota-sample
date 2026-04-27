@@ -5,7 +5,10 @@ from pathlib import Path
 import time
 
 
-scheduler: LilotaScheduler = Lilota.scheduler(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
+scheduler: LilotaScheduler = Lilota.scheduler(
+  db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample"
+)
+
 workers = Lilota.workers(
   db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
   script_path=str(Path(__file__).resolve().parent / "workerscript.py"),
