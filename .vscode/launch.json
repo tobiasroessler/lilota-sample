@@ -48,6 +48,14 @@
       "program": "${workspaceFolder}/src/6-script-with-modules/main.py",
       "args": [],
       "justMyCode": true
+    },
+    {
+      "name": "7-using-factory-methods",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/7-using-factory-methods/main.py",
+      "args": [],
+      "justMyCode": true
     }
   ]
 }
