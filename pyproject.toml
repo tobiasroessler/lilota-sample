@@ -1,0 +1,9 @@
+[project]
+name = "lilota-sample"
+version = "0.1.0"
+description = "A sample project to test the lilota package"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "lilota>=0.25.0",
+]
