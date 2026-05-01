@@ -2,8 +2,8 @@ from lilota.core import Lilota
 from lilota.models import Task
 import os
 from pathlib import Path
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import declarative_base
 import time
 
 
