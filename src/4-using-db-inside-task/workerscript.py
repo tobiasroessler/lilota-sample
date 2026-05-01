@@ -11,46 +11,48 @@ DB_URL = f"sqlite:///{DB_FILE}"
 
 
 class TestTable(Base):
-  __tablename__ = "test_table"
-  id = Column(Integer, primary_key=True)
-  value = Column(String)
+    __tablename__ = "test_table"
+    id = Column(Integer, primary_key=True)
+    value = Column(String)
 
 
-worker = LilotaWorker(db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample")
+worker = LilotaWorker(
+    db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample"
+)
 
 
-@worker.register("safe_db_task", input_model=dict[str, str], output_model=dict[str, int])
+@worker.register(
+    "safe_db_task", input_model=dict[str, str], output_model=dict[str, int]
+)
 def safe_db_task(params: dict[str, str]) -> dict[str, int]:
-  """
-  Create engine & session inside the task.
-  Insert a value into the table and return row count.
-  """
-  engine = create_engine(DB_URL, echo=False)
-  Session = sessionmaker(bind=engine)
-  session = Session()
+    """
+    Create engine & session inside the task.
+    Insert a value into the table and return row count.
+    """
+    engine = create_engine(DB_URL, echo=False)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-  try:
-    # Create table (in-memory, per process)
-    Base.metadata.create_all(engine)
+    try:
+        # Create table (in-memory, per process)
+        Base.metadata.create_all(engine)
 
-    # Insert a row
-    row = TestTable(value=params["value"])
-    session.add(row)
-    session.commit()
+        # Insert a row
+        row = TestTable(value=params["value"])
+        session.add(row)
+        session.commit()
 
-    # Count rows
-    count = session.query(TestTable).count()
-    return {
-      "count": count
-    }
-  finally:
-    session.close()
-    engine.dispose()
+        # Count rows
+        count = session.query(TestTable).count()
+        return {"count": count}
+    finally:
+        session.close()
+        engine.dispose()
 
 
 def main():
-  worker.start()
+    worker.start()
 
 
 if __name__ == "__main__":
-  main()
+    main()

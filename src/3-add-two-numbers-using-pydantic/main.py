@@ -7,44 +7,42 @@ import time
 
 
 class AddInput(BaseModel):
-  a: int
-  b: int
+    a: int
+    b: int
 
-  def as_dict(self) -> dict[str, Any]:
-    return {
-      "a": self.a,
-      "b": self.b,
-    }
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "a": self.a,
+            "b": self.b,
+        }
 
 
 class AddOutput(BaseModel):
-  sum: int
+    sum: int
 
-  def as_dict(self) -> dict[str, Any]:
-    return {
-      "sum": self.sum
-    }
+    def as_dict(self) -> dict[str, Any]:
+        return {"sum": self.sum}
 
 
 lilota = Lilota(
-  db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
-  script_path=str(Path(__file__).resolve().parent / "workerscript.py")
+    db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
+    script_path=str(Path(__file__).resolve().parent / "workerscript.py"),
 )
 
 
 def main():
-  number1 = 2
-  number2 = 3
-  lilota.start()
-  task_id = lilota.schedule("add", AddInput(a=number1, b=number2))
-  time.sleep(3) # Wait that worker picks up the task (normally not needed)
-  task: Task = lilota.get_task_by_id(task_id)
-  add_output = AddOutput(**task.output)
-  print(f"{number1} + {number2} = {add_output.sum} ") # 2 + 3 = 5
+    number1 = 2
+    number2 = 3
+    lilota.start()
+    task_id = lilota.schedule("add", AddInput(a=number1, b=number2))
+    time.sleep(3)  # Wait that worker picks up the task (normally not needed)
+    task: Task = lilota.get_task_by_id(task_id)
+    add_output = AddOutput(**task.output)
+    print(f"{number1} + {number2} = {add_output.sum} ")  # 2 + 3 = 5
 
 
 if __name__ == "__main__":
-  try:
-    main()
-  finally:
-    lilota.stop()
+    try:
+        main()
+    finally:
+        lilota.stop()
