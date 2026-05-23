@@ -1,17 +1,16 @@
 from lilota.worker import LilotaWorker
-from lilota.models import TaskProgress
+from lilota.models import TaskContext
 
 
 worker = LilotaWorker(
-    db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample",
-    set_progress_manually=True,
+    db_url="postgresql+psycopg://postgres:postgres@localhost:5432/lilota_sample"
 )
 
 
-@worker.register("do_something", task_progress=TaskProgress)
-def do_something(task_progress: TaskProgress) -> None:
+@worker.task
+def do_something(task_context: TaskContext) -> None:
     for i in range(1, 101):  # Start at 1 and ends with 100
-        task_progress.set(i)
+        task_context.progress.set(i)
 
 
 def main():

@@ -21,9 +21,7 @@ worker = LilotaWorker(
 )
 
 
-@worker.register(
-    "safe_db_task", input_model=dict[str, str], output_model=dict[str, int]
-)
+@worker.task
 def safe_db_task(params: dict[str, str]) -> dict[str, int]:
     """
     Create engine & session inside the task.

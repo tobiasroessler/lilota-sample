@@ -6,7 +6,7 @@ worker = LilotaWorker(
 )
 
 
-@worker.register("hello-world")
+@worker.task
 def hello_world() -> None:
     print("Hello World")
 
