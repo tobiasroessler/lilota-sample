@@ -19,7 +19,7 @@ workers = Lilota.workers(
 def main():
     scheduler.start()
     workers.start()
-    task_id = scheduler.schedule("hello-world")
+    task_id = scheduler.schedule("hello_world")
     time.sleep(3)  # Wait that worker picks up the task (normally not needed)
     task: Task = scheduler.get_task_by_id(task_id)
     print(task)
